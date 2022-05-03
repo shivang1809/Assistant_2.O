@@ -70,7 +70,13 @@ def getAnswer(Question):
         print(anslist)
         speak(anslist)
         
-        
+def notify(t,m):
+    notification.notify(
+    title = t,
+    message = m,
+    app_icon = None,
+    timeout = 5,
+)
 #Listening and responce system
 def command():
     print (Fore.BLUE+'Setting all things ready...')
@@ -88,6 +94,9 @@ def command():
         # functions
         if "open youtube" in lowerspeech:
             webbrowser.open("https://youtube.com")
+        elif "youtube" in lowerspeech:
+            search = lowerspeech.replace('youtube','')
+            webbrowser.open("https://www.youtube.com/results?search_query="+search)
         elif "open google" in lowerspeech:
             webbrowser.open("https://google.com")
         elif "open browser" in lowerspeech:
@@ -100,6 +109,7 @@ def command():
             os.system("start cmd")
         elif "close browser" in lowerspeech or "close web browser" in lowerspeech :
             os.system("taskkill /im msedge.exe /f")
+            notify('Browser closed','Browser has been closed succesfully')
         elif lowerspeech == ("tell me the time"):
                 print(time.asctime(time.localtime(time.time())))
                 speak(time.asctime(time.localtime(time.time())))
