@@ -10,6 +10,9 @@ import time
 import colorama
 from colorama import Fore
 from plyer import notification
+import requests
+import json
+import pyjokes
 
 colorama.init(autoreset=True)
 
@@ -76,8 +79,19 @@ def notify(t,m):
     title = t,
     message = m,
     app_icon = None,
-    timeout = 5,
-)
+    timeout = 5,)
+#news
+def news():
+    news = requests.get('https://newsapi.org/v2/top-headlines?country=in&apiKey=734dae6207c447a19e6e247d2f436590')
+    data = json.loads(news.content)
+    id = data['totalResults']
+    idNo = 0
+
+    while idNo != id:
+        print(data['articles'][idNo]['title'])
+        print(data['articles'][idNo]['url'])
+        speak(data['articles'][idNo]['title'])
+        idNo = idNo+1
 #Listening and responce system
 def command():
     print (Fore.BLUE+'Setting all things ready...')
@@ -111,6 +125,12 @@ def command():
         elif "close browser" in lowerspeech or "close web browser" in lowerspeech :
             os.system("taskkill /im msedge.exe /f")
             notify('Browser closed','Browser has been closed succesfully')
+        elif "news" in lowerspeech:
+            news()
+        elif "tell me joke" in lowerspeech or "tell me a joke" in lowerspeech:
+            joke = pyjokes.get_joke()
+            print(joke)
+            speak(joke)
         elif lowerspeech == ("tell me the time"):
                 print(time.asctime(time.localtime(time.time())))
                 speak(time.asctime(time.localtime(time.time())))
