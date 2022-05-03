@@ -9,6 +9,7 @@ import os
 import time
 import colorama
 from colorama import Fore
+from plyer import notification
 
 colorama.init(autoreset=True)
 
