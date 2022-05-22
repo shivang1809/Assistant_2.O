@@ -7,6 +7,6 @@ View old version: https://github.com/shivang1809/ai-assistant
 
 ## License
 
-License © 2021-Present Shivang Yadav
+License © 2022-Present Shivang Yadav
 
 This repository is licensed under the MIT license. See the LICENSE file for details.
